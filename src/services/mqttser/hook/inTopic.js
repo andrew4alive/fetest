@@ -6,11 +6,13 @@ var mqtt = require('mqtt');
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return async context => {
     var client  = mqtt.connect('mqtt://peceohdh:CgstCRATNRdx@m14.cloudmqtt.com:16244 ');
-   await  client.on('connect', function () {
+     client.on('connect', function () {
     //  client.subscribe('presence')
     console.log('connected');
       //client.publish('presence', 'Hello mqtt');
       client.publish('inTopic', 'Toggle led');
+      client.end()
+
       //
     });
     console.log('mqtt hello');
