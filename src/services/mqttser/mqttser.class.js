@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-
+var mqttdb = require('./mqttdb');
 
 class Service {
   constructor (options) {
@@ -7,7 +7,13 @@ class Service {
   }
 
   async find (params) {
-    return [];
+    var r= {};
+    await mqttdb.get('mqttdata',{}).then(function(item){
+     //console.log(item);
+     r = item;
+   });
+   return r;
+    //return [];
   }
 
   async get (id, params) {
@@ -17,11 +23,18 @@ class Service {
   }
 
   async create (data, params) {
-    if (Array.isArray(data)) {
+
+    mqttdb.insertlimit('mqttdata',{
+      topic:data.topic, message:data.message,createdAt:data.createdAt
+    },
+    5,{topic:data.topic}
+    );
+   return data;
+    /*if (Array.isArray(data)) {
       return await Promise.all(data.map(current => this.create(current)));
     }
 
-    return data;
+    return data;*/
   }
 
   async update (id, data, params) {

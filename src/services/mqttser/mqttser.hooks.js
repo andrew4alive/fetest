@@ -15,9 +15,9 @@ module.exports = {
   },
 
   after: {
-    all: [],
+    all: [toggleLEd()],
     find: [],
-    get: [toggleLEd()],
+    get: [],
     create: [],
     update: [],
     patch: [],

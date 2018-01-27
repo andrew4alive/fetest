@@ -8,6 +8,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
    // Throw an error if we didn't get a text
    if(!data.text) {
      throw new Error('A message must have a text');
+     //return;
    }
 
    // The authenticated user
@@ -21,7 +22,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
    context.data = {
      text,
      // Set the user id
-     userId: user,
+     userId: user._id,
      // Add the current date
      createdAt: new Date().getTime()
    };
