@@ -5,34 +5,29 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-
+    <link rel="import" id="template" href="./templ/template.html">
+    <link rel="import" id="main" href="./templ/main.html">
+    <link rel="import" id="p404" href="./templ/p404.html">
+    <link rel="import" id="notlogin" href="./templ/notlogin.html">
   <body>
-    <h1>Hello, world!</h1>
+    <div>
     <a href="/auth/facebook" id="fblogin" class="button" style="margin:50px;">Login With Facebook</a>
     <a href="http://www.google.com" id="fblogin" class="button" style="margin:50px;">google pagek</a>
     <button type="button" id="logout" name="button">Logout</button>
     <button type="button" id="getuser" name="button">Get User</button>
+  </div>
+    <span id="page">
 
-    <!--form for msg-->
-      <form id="msgform" style="margin:50px;" >
-      <!--  Name:
-        <input type="text" name="name" id="msgname" value=""><br/>
-      -->Text:
-        <input type="text" name="text" id="msgtext" value="">
-        <input type="submit" />
-      </form>
+    </span>
 
-      <button type="button" id="tl" name="button">Toggle LED</button>
 
-      <span id="tempresult"></span>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
     </script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/setup.js"></script>
+    <script src="/page.js"></script>
     <script src="/authc.js"></script>
     <script src="/app.js"></script>
 

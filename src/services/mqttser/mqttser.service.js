@@ -31,12 +31,7 @@ module.exports = function (app) {
     service.create({
       topic:topic, message:message,createdAt:new Date().getTime()
     });
-    /*mqttdb.insertlimit('mqttdata',{
-      topic:topic, message:message,createdAt:new Date().getTime()
-    },
-    5,{topic:topic}
-  );*///////
-    //mqttdb.get('mqttdata',{});
+
   };
 
   app.on('login',function(r,m){

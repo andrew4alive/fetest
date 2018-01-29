@@ -29,7 +29,7 @@ class Service {
     },
     5,{topic:data.topic}
     );
-   return data;
+   return "";
     /*if (Array.isArray(data)) {
       return await Promise.all(data.map(current => this.create(current)));
     }
