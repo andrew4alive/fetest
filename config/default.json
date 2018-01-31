@@ -6,7 +6,7 @@
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb://fe123:fe123@ds251747.mlab.com:51747/fe",
+  "mongodb": "",
   "authentication": {
     "secret": "82983d48dc902bbf0b1ec628f0b1e4a45f84639fdac6286f19a64252b1a0609b2a186a984640ce57f3eff3a1e61de4b3b76fcc92e771fd6967aa9a73b3cd4ff183ac96a473404b816e43cf305d533d5dff7f55d3d731f6fdeb38240f21fc46992a0f5088db5df1413125cfb5d99496a3185b1a8a54d455002d8774c7b59143625b17c8d85bcd688a9845f90e2a2d894f08d0aef3aa2eb05a24b80f6a868d31994499b2d28b6cd69b01b49638b151be10f773d7db9f6ae69a4a113b5746e233610d82884f98cd14c8d7a6b7a09958d8a7717bd3f55fafa18ae78f47f4e466b6131b1053868f1f75502ba417592a89e4bdd4afa3f0a9666c13142c7f8510955b63",
     "strategies": [
@@ -25,8 +25,8 @@
       "expiresIn": "1d"
     },
     "facebook": {
-      "clientID": "163683070631151",
-      "clientSecret": "1523fd1b54c3d09e28fe34f2a043b5a8",
+      "clientID": "",
+      "clientSecret": "",
       "successRedirect": "/?login=true/#/page=main",
       "scope": [
         "public_profile",
