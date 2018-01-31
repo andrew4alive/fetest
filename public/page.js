@@ -56,7 +56,7 @@ pageh.control=function(r,n,c){// r =route c= container n=not found page
      var template = link.import.querySelector('template');
 
      var clone = document.importNode(template.content, true);
-
+     container.innerHTML="";
      container.appendChild(clone);
      return true;
     }

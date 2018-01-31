@@ -1,0 +1,184 @@
+<template >
+  <style >
+    #mqttconform{
+      font-size: 25px;
+      overflow: hidden;
+      transition: max-height 1s;
+    }
+    input{
+      display: block;
+      width: 100%;
+    }
+    #mqttconform>button{
+      margin-top: 10px;
+    }
+  </style>
+
+  <div id="mqttY" class="standard"  >
+
+  </div>
+  <div >
+
+
+  <form id="mqttconform"
+  style="margin:10px;width:80%;border:solid;padding:10px;margin-top:25px;max-height:0%;display:none;">
+  <div >
+    Setup MQtt
+  </div>
+  <hr>
+    Username:
+    <input type="text" id="username" required  >
+    Password:
+    <input type="text" id="password" required>
+    Host/Server:
+    <input type="text" id="server" required>
+    Protocal:
+    <input type="text" id="protocal" required>
+    Port:
+    <input type="text" id="port" style="margin-bottom:10px;" required>
+    Mqtt Url:<span id="url"></span>
+    </br>
+    <button type="submit">Submit</button>
+    <button type="button" id="clearform1">Clear Form</button>
+  </form>
+</div>
+  <script>
+  //for test
+  var tc = document.querySelector('#mqttconform').childNodes;
+  for(var i=0;i<tc.length;i++){
+    if(tc[i].tagName=="INPUT") tc[i].removeAttribute('required');
+  }
+//
+
+
+function initsettings(uid){
+
+  client.service('mqttcon').find({
+    query:{
+      $limit:1,
+      $sort:{
+        createdAt:-1
+      },
+    }
+  }).then(function(i1){
+        //console.log(i1);
+
+
+        if(i1.total>=0){
+          document.querySelector('#mqttY').innerHTML ='<span class="closebtn" onclick="formcon()">s</span>'+
+              'Your MQTT is setup';
+
+
+        }else
+        {
+          document.querySelector('#mqttY').innerHTML ='<span class="closebtn" onclick="formcon">s</span>'+
+                'Please setup MQTT ';
+        }
+
+    /*    setTimeout(function () {
+          auth(function(uid1){
+            initsettings(uid1);
+          });
+        }, 100);*/
+  });
+}
+
+auth(function(userid){
+
+  initsettings(userid);
+
+  document.querySelector('#mqttconform').addEventListener('submit',function(e){
+        e.preventDefault();
+        var input = forminputtoarray(e.currentTarget.id);
+        var key = Object.keys(input);
+        var mustkey = getformkey(e.currentTarget.id);
+        for(var i = 0 ;i<key.length;i++){
+            if(mustkey.indexOf(key[i])!=-1)
+              mustkey.splice(mustkey.indexOf(key[i]),1);
+        }
+        if(mustkey.length>0){
+          var ce = document.createElement('div');
+          ce.setAttribute('class','flash');
+          ce.style.position='absolute';
+          ce.style.display='block';
+          ce.style.width="60%";
+          ce.style.opcaity=0;
+          ce.innerHTML="fill in all form";
+          document.body.appendChild(ce);
+          setTimeout(function () {
+            var elem = document.querySelector('.flash');
+            elem.parentNode.removeChild(elem);
+          }, 3000);
+          return false;
+        }
+        client.service('mqttcon').create(input).then(function(item){
+          formcon();
+          client.service('mqttcon').find().then(function(i1){
+                console.log(i1);
+          });
+
+        });
+    });
+    document.querySelector('#clearform1').addEventListener('click',function(e){
+      var dom = e.currentTarget.parentElement;
+      var child = dom.childNodes;
+      for(var i=0;i<child.length;i++){
+        if(child[i].tagName=="INPUT")
+            child[i].value="";
+      }
+    });
+});
+
+
+
+
+
+
+  //helper
+  function forminputtoarray(id){
+    var r={};
+    var ele=document.querySelector('#'+id);
+    if (ele ==null) throw "cannot find Element";
+     var elechild = ele.childNodes;
+     for(var i=0;i<elechild.length;i++){
+       if(elechild[i].tagName=='INPUT'){
+      //   console.log(elechild[i].value=="");
+         if(elechild[i].value.trim()!=""){
+         //var temp={};
+         //temp[elechild[i].id] = elechild[i].value.trim();
+         //r.push(temp);
+         r[elechild[i].id] = elechild[i].value.trim();
+       }
+     }
+     }
+     return r;
+  }
+
+  function getformkey(id){
+    var r=[];
+    var ele=document.querySelector('#'+id);
+    if(ele==null) return [];
+    var child = ele.childNodes;
+    for ( var i = 0 ; i<child.length;i++){
+      if(child[i].tagName=="INPUT") r.push(child[i].id);
+    }
+    return r;
+  }
+
+  ///
+  function formcon(){
+      var dom = document.querySelector('#mqttconform');
+      //console.log('clieck');
+      if(dom.style.display=="none"){
+        dom.style.display="block";
+        dom.style.maxHeight="100%";
+      }
+      else{
+        dom.style.display="none";
+        dom.style.maxHeight="0%";
+      }
+
+  }
+
+  </script>
+</template>

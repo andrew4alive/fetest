@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 var mqttdb = require('./mqttdb');
-
+var mqtts = require('./mqttcon');
 class Service {
   constructor (options) {
     this.options = options || {};
@@ -29,16 +29,22 @@ class Service {
     },
     5,{topic:data.topic}
     );
-   return "";
-    /*if (Array.isArray(data)) {
-      return await Promise.all(data.map(current => this.create(current)));
-    }
 
-    return data;*/
+   return "";
+
   }
 
   async update (id, data, params) {
-    return data;
+    mqtts.connect(data.userid,data.url,getmqtt);
+
+      function getmqtt(topic,message){
+
+        service.create({
+          topic:topic, message:message,createdAt:new Date().getTime()
+        });
+
+      };
+    return "";
   }
 
   async patch (id, data, params) {

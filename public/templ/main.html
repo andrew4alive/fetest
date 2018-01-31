@@ -20,6 +20,7 @@ document.querySelector('#msgform').addEventListener('submit', async ev => {
   if(ev.target.id === 'msgform') {
     // This is the message text input field
     const input = document.querySelector('#msgtext');
+    console.log(input);
     // Create a new message and then clear the input field
     await client.service('msg').create({
       text: input.value
@@ -61,14 +62,12 @@ client.service('msg').on('created',function(data){
  //console.log(data);
 });
 
-client.service('mqttser').on('created',function(data){
+client.service('mqttser').on('created',createdmqttser);
 
- //console.log(data);
-  gettemp();
-
-});
-
-
+function  createdmqttser(data){
+  //console.log(data);
+   gettemp();
+}
 /*
 setTimeout(function () {
   gettemp();
@@ -82,6 +81,10 @@ setTimeout(function () {
   var html="<br/>"
   for(var i=0;i<d.length;i++){
     html=html+"temperature:"+d[i]['message']+'<br/>'
+  }
+  if(document.querySelector("#tempresult")==null){
+    client.service('mqttser').removeListener('created',createdmqttser);
+    return false;
   }
   document.querySelector("#tempresult").innerHTML = html;
 /*)    setTimeout(function () {

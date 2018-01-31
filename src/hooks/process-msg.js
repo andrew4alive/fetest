@@ -17,12 +17,12 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
    const text = context.data.text
      // Messages can't be longer than 400 characters
      .substring(0, 3);
-     console.log(context);
+    // console.log(context);
    // Override the original data (so that people can't submit additional stuff)
    context.data = {
      text,
      // Set the user id
-     userId: user._id,
+     userId: user._id.toString(),
      // Add the current date
      createdAt: new Date().getTime()
    };
